@@ -1,15 +1,12 @@
-###############################################################################
-#                          Generated on phpdocker.io                          #
-###############################################################################
 version: "3.1"
 services:
 
     mysql:
-      image: mysql:8.0
+      image: mariadb:10.2
       container_name: docker-symfony4-mysql
       working_dir: /application
       volumes:
-        - .:/application
+        - "./.data/db:/var/lib/mysql"
       environment:
         - MYSQL_ROOT_PASSWORD=dbrootpw
         - MYSQL_DATABASE=docker_symfony4
@@ -34,5 +31,5 @@ services:
       working_dir: /application
       volumes:
         - .:/application
-        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+        #- ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
 

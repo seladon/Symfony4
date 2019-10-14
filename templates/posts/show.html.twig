@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p>{{ post.body }}</p><br>
+    <a href="{{ path('blog_post_edit', {'slug': post.slug}) }}">Редактировать</a><br>
+    <a href="{{ path('blog_post_delete', {'slug': post.slug}) }}">Удалить</a><br>
+    <small class="d-block text-right mt-3">
+        <a href="{{ path('blog_posts') }}">На главную</a>
+    </small>
+{% endblock %}

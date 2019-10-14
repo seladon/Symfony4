@@ -7,7 +7,7 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
+.data
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/

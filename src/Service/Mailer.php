@@ -9,7 +9,7 @@ use Twig_Environment;
 
 class Mailer
 {
-    public const FROM_ADDRESS = 'info@synergy.ru';
+    public const FROM_ADDRESS = 'seladon80@gmail.com';
 
     /**
      * @var Swift_Mailer

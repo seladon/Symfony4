@@ -9,8 +9,8 @@
 </head>
 <body>
 <div class="container">
-    <p>Добро пожаловать, {{ user.username }}!</p>
-    <p>Чтобы завершить регистрацию, подтвердите <a href="{{ path('email_confirmation', {'code': user.confirmationCode }) }}">электронный адрес</a></p>
+    <p>{{ user.username }}, добро пожаловать!</p>
+    <p>Чтобы завершить регистрацию, подтвердите <a href="{{ app.request.schemeAndHttpHost }}{{ path('email_confirmation', {'code': user.confirmationCode }) }}">электронный адрес</a></p>
 </div>
 </body>
 </html>

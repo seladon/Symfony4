@@ -1,15 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Event\RegisteredUserEvent;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\CodeGenerator;
 use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +24,7 @@ class RegisterController extends AbstractController
         UserPasswordEncoderInterface $passwordEncoder,
         Request $request,
         CodeGenerator $codeGenerator,
-        Mailer $mailer
+        EventDispatcherInterface $eventDispatcher
     )
     {
         $user = new User();
@@ -50,7 +50,8 @@ class RegisterController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $mailer->sendConfirmationMessage($user);
+            $userRegisteredEvent = new RegisteredUserEvent($user);
+            $eventDispatcher->dispatch($userRegisteredEvent, RegisteredUserEvent::NAME);
         }
 
         return $this->render('security/register.html.twig', [
